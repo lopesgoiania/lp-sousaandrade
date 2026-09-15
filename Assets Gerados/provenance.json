@@ -1,0 +1,29 @@
+{
+  "provider": "Higgsfield",
+  "video": {
+    "job_id": "d31bfb82-9022-49c5-b409-41bf2e2e0acd",
+    "model": "seedance_2_5",
+    "duration": 10,
+    "resolution": "720p",
+    "generate_audio": false,
+    "aspect_ratio": "16:9",
+    "prompt_file": "prompts/earth.txt",
+    "file": "../dist/assets/earth-approach.mp4"
+  },
+  "poster": {
+    "derived_from": "video first frame",
+    "media_id": "45e8f8c9-9d65-46bf-be75-ad5206fe72c3",
+    "file": "../dist/assets/earth-poster.jpg"
+  },
+  "map": {
+    "job_id": "d861cefc-70a4-4e55-8ecd-ac7747583846",
+    "model": "gpt_image_2_5",
+    "quality": "medium",
+    "resolution": "2k",
+    "aspect_ratio": "4:3",
+    "reference_media_id": "b3a50d70-1d4f-415d-8bf3-3f21872ac276",
+    "prompt_file": "prompts/map.txt",
+    "file": "../dist/assets/territory-illustration.webp"
+  },
+  "preflight_credits_total": 66.5
+}

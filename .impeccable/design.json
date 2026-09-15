@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-15T09:55:23.121769+00:00",
+  "title": "Design System: Lopes · Sousa Andrade",
+  "extensions": {
+    "colorMeta": {
+      "red": {
+        "role": "primary",
+        "displayName": "Vermelho Lopes"
+      },
+      "red-functional": {
+        "role": "primary",
+        "displayName": "Vermelho funcional"
+      },
+      "black": {
+        "role": "neutral",
+        "displayName": "Preto"
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Branco"
+      }
+    },
+    "motion": [
+      {
+        "name": "section-entry",
+        "value": "650ms cubic-bezier(0.16,1,0.3,1)",
+        "purpose": "Entradas únicas de título e conteúdo."
+      },
+      {
+        "name": "media-reveal",
+        "value": "850ms cubic-bezier(0.16,1,0.3,1)",
+        "purpose": "Abertura da máscara das mídias."
+      },
+      {
+        "name": "count",
+        "value": "1450ms cubic ease-out",
+        "purpose": "Contagem única até 29/45."
+      },
+      {
+        "name": "beam",
+        "value": "md/colorful/0.7/dark",
+        "purpose": "Contorno animado solicitado; pausa fora de tela e com movimento reduzido."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow-max",
+        "value": "370px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "760px"
+      },
+      {
+        "name": "tablet-max",
+        "value": "1100px"
+      }
+    ],
+    "shadows": [
+      {
+        "name": "map-switch",
+        "value": "0 4px 18px #00000012",
+        "purpose": "Separar controle do mapa"
+      },
+      {
+        "name": "mobile-cta",
+        "value": "0 6px 24px #0002",
+        "purpose": "Separar CTA móvel"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão principal",
+      "kind": "button",
+      "description": "Amostra isolada da implementação. O card real recebe o wrapper BorderBeam animado.",
+      "html": "<button class=\"demo primary\">Receber informações</button>",
+      "css": "*{box-sizing:border-box}a{text-decoration:none;color:inherit}button,input{font:inherit}:focus-visible{outline:3px solid #e8232a;outline-offset:4px}.demo{font-family:'DM Sans',sans-serif;color:#191919}.primary{border:0;border-radius:6px;padding:18px 24px;background:#df2029;color:white;font-size:15px;font-weight:600;min-height:58px}.primary:hover{background:#c71420}"
+    },
+    {
+      "name": "Link editorial",
+      "kind": "button",
+      "description": "Amostra isolada da implementação. O card real recebe o wrapper BorderBeam animado.",
+      "html": "<a class=\"demo link\" href=\"#cadastro\">Conheça o projeto</a>",
+      "css": "*{box-sizing:border-box}a{text-decoration:none;color:inherit}button,input{font:inherit}:focus-visible{outline:3px solid #e8232a;outline-offset:4px}.demo{font-family:'DM Sans',sans-serif;color:#191919}.link{display:inline-block;border-bottom:1px solid #777;padding:12px 0;font-size:14px}"
+    },
+    {
+      "name": "Campo",
+      "kind": "input",
+      "description": "Amostra isolada da implementação. O card real recebe o wrapper BorderBeam animado.",
+      "html": "<label class=\"demo field\">Seu nome<input placeholder=\"Como você gostaria de ser chamado?\"></label>",
+      "css": "*{box-sizing:border-box}a{text-decoration:none;color:inherit}button,input{font:inherit}:focus-visible{outline:3px solid #e8232a;outline-offset:4px}.demo{font-family:'DM Sans',sans-serif;color:#191919}.field{display:block;font-size:13px}.field input{display:block;width:100%;margin-top:8px;border:1px solid #c7c7c7;border-radius:5px;padding:12px 14px;min-height:52px;font-size:14px}"
+    },
+    {
+      "name": "Interesse",
+      "kind": "chip",
+      "description": "Amostra isolada da implementação. O card real recebe o wrapper BorderBeam animado.",
+      "html": "<label class=\"demo option\"><input type=\"radio\" name=\"interest\"><span>Quero morar</span></label>",
+      "css": "*{box-sizing:border-box}a{text-decoration:none;color:inherit}button,input{font:inherit}:focus-visible{outline:3px solid #e8232a;outline-offset:4px}.demo{font-family:'DM Sans',sans-serif;color:#191919}.option{position:relative;display:inline-block;font-size:12px}.option input{position:absolute;opacity:0}.option span{display:block;padding:9px 12px;border:1px solid #d0d0d0;border-radius:5px}.option input:checked+span{background:#222;color:white}.option input:focus-visible+span{outline:3px solid #e8232a}"
+    },
+    {
+      "name": "Navegação",
+      "kind": "nav",
+      "description": "Amostra isolada da implementação. O card real recebe o wrapper BorderBeam animado.",
+      "html": "<nav class=\"demo navigation\"><a href=\"#localizacao\">O endereço</a><a href=\"#compactos\">O projeto</a></nav>",
+      "css": "*{box-sizing:border-box}a{text-decoration:none;color:inherit}button,input{font:inherit}:focus-visible{outline:3px solid #e8232a;outline-offset:4px}.demo{font-family:'DM Sans',sans-serif;color:#191919}.navigation{display:flex;gap:38px;font-size:14px}.navigation a:hover{text-decoration:underline;text-underline-offset:7px}"
+    },
+    {
+      "name": "Card de escolha",
+      "kind": "card",
+      "description": "Amostra isolada da implementação. O card real recebe o wrapper BorderBeam animado.",
+      "html": "<a class=\"demo choice\" href=\"#cadastro\"><span>Para morar</span><h3>Menos distâncias.<br>Mais cidade.</h3><p>Um compacto conectado ao seu ritmo e às possibilidades do entorno.</p><span class=\"action\">Quero morar aqui</span></a>",
+      "css": "*{box-sizing:border-box}a{text-decoration:none;color:inherit}button,input{font:inherit}:focus-visible{outline:3px solid #e8232a;outline-offset:4px}.demo{font-family:'DM Sans',sans-serif;color:#191919}.choice{display:flex;flex-direction:column;background:#121212;color:white;border-radius:14px;padding:42px;min-height:380px}.choice>span:first-child{color:#bbb;font-size:14px}.choice h3{font-family:Manrope,sans-serif;font-size:36px;line-height:1.2;letter-spacing:-.035em;font-weight:500;margin:26px 0 21px}.choice p{font-size:16px;line-height:1.65;color:#b8b8b8}.choice .action{border-top:1px solid #383838;padding-top:24px;margin-top:auto;font-size:14px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Editorial Lopes",
+    "overview": "Abertura cinematográfica, loops do entorno gerados no Higgsfield a partir de fotografias fornecidas e CTA por cadastro. Cards escuros com BorderBeam solicitado.",
+    "keyCharacteristics": [
+      "Tipografia ampla",
+      "Contraste claro/escuro",
+      "Vídeos discretos sem som",
+      "Ações acessíveis durante o percurso"
+    ],
+    "dos": [
+      "Preservar as marcas e fatos fornecidos",
+      "Pausar movimento fora da tela e respeitar movimento reduzido"
+    ],
+    "donts": [
+      "Não inventar datas ou rentabilidade",
+      "Não simular envio ao CRM ou reprodução da VSL"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "provider": "Higgsfield",
+  "cost_credits": 12.5,
+  "clips": [
+    {
+      "name": "shopping",
+      "job_id": "0bac33db-aada-418a-95d0-95741fbc9a5f",
+      "model": "kling3_0",
+      "mode": "std",
+      "sound": "off",
+      "duration": 5,
+      "start_image": "90d73d87-9d0a-4fee-9b6f-d3e1cebe6239",
+      "end_image": "90d73d87-9d0a-4fee-9b6f-d3e1cebe6239",
+      "prompt": "Create a restrained photoreal silent five-second cinemagraph loop from this exact Flamboyant Shopping photograph. Perfectly locked camera: zero pan, tilt, zoom, roll, parallax or reframing. Preserve the photograph composition, white shopping architecture, red entrance facade, glass dome, skyline, every existing sign and all lettering, parking layout, road geometry and parked cars exactly throughout. Animate ONLY a barely perceptible gentle breeze in existing palm fronds and tree foliage; tiny natural cloud drift that returns to the initial appearance at the loop seam. Daylight and exposure stay stable. Buildings, signage, vehicles, road paint and people stay unchanged and stationary. Add nothing. No new people, no new vehicles, no morphing, no architecture changes, no moving shadows, no titles, no audio. First and last frames match the provided photograph for a seamless understated looping website background.",
+      "file": "../dist/assets/shopping-loop.mp4"
+    },
+    {
+      "name": "park",
+      "job_id": "69823ed2-f57a-4315-b6cb-4b111ae97d0b",
+      "model": "kling3_0",
+      "mode": "std",
+      "sound": "off",
+      "duration": 5,
+      "start_image": "5d572477-1cdb-4d61-a859-b74b1ae73e38",
+      "end_image": "5d572477-1cdb-4d61-a859-b74b1ae73e38",
+      "prompt": "Create a restrained photoreal silent five-second cinemagraph loop from this exact Parque Flamboyant photograph. Perfectly locked camera: zero pan, tilt, zoom, roll, parallax or reframing. Preserve the exact composition and geometry of the lake shore, pathways, trees, grass, skyline and every building/window, with the same bright daylight and colors. Animate ONLY extremely subtle natural ripples on the existing lake water and a barely perceptible gentle breeze in existing tree leaves. Keep lake shore and building reflections geographically anchored without distortion. All buildings and paths remain completely stable. Add nothing: no new people, animals, boats, fountains, buildings, clouds or objects. No architecture changes, morphing, text, logos or audio. First and last frames match the provided photograph for a seamless quiet looping website background.",
+      "file": "../dist/assets/park-loop.mp4"
+    }
+  ]
+}
