@@ -26,7 +26,7 @@ O CRM distribui os leads conforme a disponibilidade dos corretores. Os especiali
 
 - Cadastro com nome e contato. E-mail e segmentação do briefing original ainda não foram confirmados como campos obrigatórios.
 - Não apresentar envio simulado como cadastro recebido. A confirmação real depende de integração funcional.
-- Dados do material fornecido: 350 unidades, sendo 300 de 29 m² e 50 de 45 m².
+- Dados do material fornecido: 300 unidades no projeto (sendo de 29 m² e 45 m²).
 - Marca com grafia confirmada: Sousa Andrade. Não há outro nome comercial específico informado.
 - Lançamento sem data confirmada. A captura menciona meeting em 08/10 e vendas em 10/11, sem ano explícito; a atualização verbal do usuário prevalece e essas datas não são compromisso público.
 - Não há renders oficiais de fachada ou áreas comuns disponíveis. Holograma é representação conceitual, sem atribuir arquitetura real ao produto.

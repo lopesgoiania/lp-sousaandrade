@@ -8,6 +8,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="styles.css">
   <script type="module" src="assets/choices.js"></script>
+  <script type="module" src="assets/title-effect.js"></script>
   <script src="config.js" defer></script><script src="app.js" defer></script>
 </head>
 <body>
@@ -26,19 +27,19 @@
         <div class="hero-content wrap">
           <div class="hero-copy">
             <h1>O mundo é grande.<br>Seu próximo endereço<br>é <em>aqui.</em></h1>
-            <p>Um novo projeto Sousa Andrade.<br>Ao lado do Flamboyant. No centro das possibilidades.</p>
+            <p>Um <strong>novo projeto Sousa Andrade</strong>.<br><strong>Ao lado do Flamboyant Shopping</strong>. No centro das possibilidades.</p>
             <a class="button button-red" href="#cadastro">Quero conhecer primeiro <svg><use href="#diagonal"/></svg></a>
           </div>
           <div class="hero-location"><span class="location-line"></span><span>Goiânia, GO<br><strong>Distrito Flamboyant</strong></span></div>
         </div>
-        <div class="arrival-copy wrap" aria-hidden="true"><h2>Alguns lugares<br>mudam tudo.</h2><p>Ao lado do Flamboyant Shopping.<br>Um novo olhar para viver e investir em Goiânia.</p></div>
+        <div class="arrival-copy wrap" aria-hidden="true"><h2>Alguns lugares<br>mudam tudo.</h2><p><strong>Ao lado do Flamboyant Shopping</strong>.<br>Um novo olhar para viver e <strong>investir em Goiânia</strong>.</p></div>
         <div class="journey-bottom wrap"><a class="scroll-hint" href="#localizacao"><span class="scroll-icon"><svg><use href="#down"/></svg></span>Role e descubra o endereço</a><div class="journey-track" aria-hidden="true"><span>O mundo</span><i><b></b></i><span>Seu lugar</span></div><span class="launch-label">Pré-lançamento</span></div>
       </div>
     </section>
 
     <section class="vsl-section" id="apresentacao" aria-labelledby="vsl-heading">
       <div class="wrap">
-        <div class="vsl-heading motion-heading"><h2 id="vsl-heading">Um endereço muda<br><em>o jeito de viver.</em></h2><div><p>Conheça a proposta do novo projeto Sousa Andrade e o que torna essa localização um ponto de partida para morar ou investir.</p><a class="text-link light" href="#cadastro">Quero conhecer o projeto <svg><use href="#diagonal"/></svg></a></div></div>
+        <div class="vsl-heading motion-heading"><h2 id="vsl-heading">Um endereço muda<br><em>o jeito de viver.</em></h2><div><p>Conheça a proposta do <strong>novo projeto Sousa Andrade</strong> e o que torna essa <strong>localização</strong> um ponto de partida para morar ou <strong>investir</strong>.</p><a class="text-link light" href="#cadastro">Quero conhecer o projeto <svg><use href="#diagonal"/></svg></a></div></div>
         <div class="vsl-player motion-frame" id="vsl-player">
           <video id="presentation-video" controls playsinline preload="none" poster="assets/shopping-poster.webp" aria-label="Apresentação do empreendimento Sousa Andrade" hidden></video>
           <div class="vsl-placeholder"><img src="assets/shopping-poster.webp" alt="Flamboyant Shopping e seu entorno" width="1600" height="1200" loading="lazy"><div class="vsl-scrim"></div><div class="vsl-placeholder-content"><span class="vsl-play-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z"/></svg></span><p>Uma nova perspectiva<br>sobre o seu próximo endereço.</p><span class="vsl-status">Vídeo de apresentação em breve</span></div></div>
@@ -80,9 +81,9 @@
 
     <section class="opportunity" id="compactos">
       <div class="wrap opportunity-grid">
-        <div class="opportunity-copy"><h2>Novos espaços.<br><em>Grandes possibilidades.</em></h2><p>Compactos para quem quer viver a cidade de perto. Ou enxergar nela a próxima oportunidade.</p><p class="muted">Um projeto Sousa Andrade que começa pelo essencial: a localização.</p><a class="text-link light" href="#cadastro">Conheça o pré-lançamento <svg><use href="#diagonal"/></svg></a></div>
+        <div class="opportunity-copy"><div id="opportunity-title"><h2>Novos espaços.<br><em>Grandes possibilidades.</em></h2></div><p>Compactos para quem quer viver a cidade de perto. Ou enxergar nela a próxima oportunidade.</p><p class="muted">Um projeto Sousa Andrade que começa pelo essencial: a localização.</p><a class="text-link light" href="#cadastro">Conheça o pré-lançamento <svg><use href="#diagonal"/></svg></a></div>
         <div class="building-art"><canvas id="building" width="700" height="560" aria-label="Volumetria abstrata e conceitual de um edifício"></canvas><span>Representação conceitual.<br>Não representa o projeto arquitetônico.</span></div>
-        <div class="typologies"><div class="typology"><span>Compactos de</span><p aria-label="29 metros quadrados"><span data-count="29" aria-hidden="true">29</span> <small aria-hidden="true">m²</small></p><span>300 unidades no projeto</span></div><div class="typology"><span>Compactos de</span><p aria-label="45 metros quadrados"><span data-count="45" aria-hidden="true">45</span> <small aria-hidden="true">m²</small></p><span>50 unidades no projeto</span></div><div class="project-total"><strong>350 unidades.</strong><span>Uma nova perspectiva<br>para o seu próximo passo.</span></div></div>
+        <div class="typologies"><div class="typology"><span>Compactos de</span><p aria-label="29 metros quadrados"><span data-count="29" aria-hidden="true">29</span> <small aria-hidden="true">m²</small></p><span>300 unidades no projeto</span></div><div class="typology"><span>Compactos de</span><p aria-label="45 metros quadrados"><span data-count="45" aria-hidden="true">45</span> <small aria-hidden="true">m²</small></p><span>50 unidades no projeto</span></div><div class="project-total"><strong>300 unidades.</strong><span>Uma nova perspectiva<br>para o seu próximo passo.</span></div></div>
       </div>
     </section>
 

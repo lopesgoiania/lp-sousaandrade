@@ -117,23 +117,125 @@
 
   // One-shot editorial entrances; page content remains visible without JS.
   const runningMotions = new Set();
+  const getMotionAnimation = (element) => {
+    if (element.classList.contains('vsl-player')) {
+      return {
+        keyframes: [
+          { transform: 'translateY(36px) scale(0.96)', opacity: 0 },
+          { transform: 'translateY(0) scale(1)', opacity: 1 }
+        ],
+        options: { duration: 900, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+      };
+    }
+    if (element.classList.contains('feature-shopping')) {
+      return {
+        keyframes: [
+          { transform: 'translateX(-36px)', opacity: 0 },
+          { transform: 'translateX(0)', opacity: 1 }
+        ],
+        options: { duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+      };
+    }
+    if (element.classList.contains('feature-park')) {
+      return {
+        keyframes: [
+          { transform: 'translateX(36px)', opacity: 0 },
+          { transform: 'translateX(0)', opacity: 1 }
+        ],
+        options: { duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+      };
+    }
+    if (element.id === 'map-canvas') {
+      return {
+        keyframes: [
+          { clipPath: 'inset(4% round 12px)', transform: 'scale(1.03)', opacity: 0.6 },
+          { clipPath: 'inset(0% round 12px)', transform: 'scale(1)', opacity: 1 }
+        ],
+        options: { duration: 950, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+      };
+    }
+    if (element.classList.contains('building-art')) {
+      return {
+        keyframes: [
+          { transform: 'scale(0.88) translateY(24px)', opacity: 0 },
+          { transform: 'scale(1) translateY(0)', opacity: 1 }
+        ],
+        options: { duration: 850, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+      };
+    }
+    if (element.classList.contains('choice-beam-cell') || element.classList.contains('choice')) {
+      return {
+        keyframes: [
+          { transform: 'translateY(32px) rotateX(6deg)', opacity: 0 },
+          { transform: 'translateY(0) rotateX(0deg)', opacity: 1 }
+        ],
+        options: { duration: 750, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+      };
+    }
+    if (element.classList.contains('partner-logos')) {
+      return {
+        keyframes: [
+          { transform: 'scale(0.85)', opacity: 0 },
+          { transform: 'scale(1)', opacity: 1 }
+        ],
+        options: { duration: 700, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }
+      };
+    }
+    if (element.id === 'lead-form') {
+      return {
+        keyframes: [
+          { transform: 'translateX(28px) translateY(12px)', opacity: 0 },
+          { transform: 'translateX(0) translateY(0)', opacity: 1 }
+        ],
+        options: { duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+      };
+    }
+    if (element.classList.contains('contact-copy')) {
+      return {
+        keyframes: [
+          { transform: 'translateX(-28px)', opacity: 0 },
+          { transform: 'translateX(0)', opacity: 1 }
+        ],
+        options: { duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+      };
+    }
+    if (element.classList.contains('motion-frame')) {
+      return {
+        keyframes: [
+          { clipPath: 'inset(3% 0 3% 0 round 10px)', opacity: .7 },
+          { clipPath: 'inset(0% 0 0% 0 round 10px)', opacity: 1 }
+        ],
+        options: { duration: 850, easing: 'cubic-bezier(0.16,1,0.3,1)' }
+      };
+    }
+    return {
+      keyframes: [
+        { transform: 'translateY(24px)', opacity: .4 },
+        { transform: 'translateY(0)', opacity: 1 }
+      ],
+      options: { duration: 650, easing: 'cubic-bezier(0.16,1,0.3,1)' }
+    };
+  };
+
   const motionObserver = new IntersectionObserver(entries=>{
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
-      const element=entry.target;motionObserver.unobserve(element);
+      const element=entry.target; motionObserver.unobserve(element);
       if(reduced.matches)continue;
-      const frame=element.classList.contains('motion-frame');
-      const animation=element.animate(frame
-        ? [{clipPath:'inset(3% 0 3% 0 round 10px)',opacity:.7},{clipPath:'inset(0% 0 0% 0 round 10px)',opacity:1}]
-        : [{transform:'translateY(22px)',opacity:.45},{transform:'translateY(0)',opacity:1}],
-        {duration:frame?850:650,easing:'cubic-bezier(0.16,1,0.3,1)'});
-      runningMotions.add(animation);animation.finished.then(()=>runningMotions.delete(animation)).catch(()=>{});
+      const spec = getMotionAnimation(element);
+      const animation=element.animate(spec.keyframes, spec.options);
+      runningMotions.add(animation); animation.finished.then(()=>runningMotions.delete(animation)).catch(()=>{});
     }
-  },{threshold:.12});
-  $$('.motion-heading,.motion-frame,.opportunity-copy,.choices h2,.partnership,.contact-copy').forEach(element=>motionObserver.observe(element));
+  },{threshold:.15, rootMargin: '0px 0px -40px 0px'});
+
+  $$('.motion-heading, .vsl-heading, .vsl-player, .feature-shopping, .feature-park, #map-canvas, .opportunity-copy, .building-art, .choices h2, .choice-beam-cell, .partnership, .partner-logos, .contact-copy, #lead-form').forEach(element=>motionObserver.observe(element));
+
   let countFrame=0;
   const countNodes=$$('[data-count]');
   const finishCounts=()=>{cancelAnimationFrame(countFrame);countNodes.forEach(node=>node.textContent=node.dataset.count);};
+  if(!reduced.matches) {
+    countNodes.forEach(node=>node.textContent='0');
+  }
   const countObserver=new IntersectionObserver(entries=>{
     if(!entries.some(entry=>entry.isIntersecting))return;
     countObserver.disconnect();
@@ -141,8 +243,9 @@
     const started=performance.now();
     function tick(now){const p=clamp((now-started)/1450);const eased=1-Math.pow(1-p,3);countNodes.forEach(node=>node.textContent=String(Math.round(Number(node.dataset.count)*eased)));if(p<1)countFrame=requestAnimationFrame(tick);}
     countFrame=requestAnimationFrame(tick);
-  },{threshold:.35});
-  countObserver.observe($('.typologies'));
+  },{threshold:.3, rootMargin:'0px 0px -50px 0px'});
+  const targetSec = $('#compactos') || $('.typologies');
+  if(targetSec) countObserver.observe(targetSec);
   reduced.addEventListener('change',()=>{if(reduced.matches){runningMotions.forEach(animation=>animation.cancel());runningMotions.clear();finishCounts();}});
 
   const map = $('#territory-map');
