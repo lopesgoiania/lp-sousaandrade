@@ -1,7 +1,5 @@
 window.SITE_CONFIG = Object.freeze({
-  // Production n8n webhook. CRM/Supabase/email processing belongs to n8n.
-  // Respond with 2xx { success: true } only after accepting the lead.
-  n8nWebhookUrl: 'https://n8n.marketinglopes.com.br/webhook/captura-site-codex',
+  // Main form sends independently to CRM and n8n through /api/leads.
   vipWebhookUrl: 'URL_WEBHOOK_CLICKUP',
   empreendimento: 'Sousa Andrade — Flamboyant',
   // Custom VSL covers: provide separate 16:9 and 9:16 artwork.

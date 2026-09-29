@@ -248,10 +248,9 @@
   const submit = $('button[type="submit"]', form);
   const phone = $('#phone');
   const feedback = $('#form-feedback');
-  let endpoint = null;
-  try { if (config.n8nWebhookUrl) { const url = new URL(config.n8nWebhookUrl, location.origin); if (url.protocol === 'https:' || (url.origin === location.origin && location.hostname === 'localhost')) endpoint = url.href; } } catch { /* Keep unavailable if configuration is invalid. */ }
-  submit.disabled = !endpoint;
-  $('#availability').hidden = !!endpoint;
+  const endpoint = '/api/leads';
+  submit.disabled = false;
+  $('#availability').hidden = true;
   phone.addEventListener('input', () => {
     let digits = phone.value.replace(/\D/g, '');
     if (digits.length > 11 && digits.startsWith('55')) digits = digits.slice(2);
@@ -261,6 +260,7 @@
   function fieldError(id, message) { const el=$(`#${id}`); el.setAttribute('aria-invalid',String(!!message)); $(`#${id}-error`).textContent=message; }
   ['name','phone','email','consent'].forEach(id => $(`#${id}`).addEventListener('input', () => fieldError(id,'')));
   let pending=false;
+  let delivery = null;
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (pending) return;
@@ -275,7 +275,7 @@
     pending=true; submit.disabled=true; $('span',submit).textContent='Enviando…'; feedback.textContent='';
     const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),15000);
     try {
-      // The site captures data; n8n owns CRM, database and email workflows.
+      // Independent delivery: CRM handles sales; n8n handles relationship workflows.
       const payload = {
         nome: name,
         email,
@@ -286,17 +286,22 @@
         source: 'sousa-andrade-flamboyant',
         ...window.LeadContext.payload()
       };
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        signal: controller.signal,
-        body: JSON.stringify(payload)
-      });
-      const data=await response.json().catch(()=>null);
-      if(!response.ok||data?.success!==true)throw new Error('Not accepted');
+      const identity = JSON.stringify([name,email,digits,payload.lead_intent]);
+      if (!delivery || delivery.identity !== identity) delivery = {identity,payload,accepted:new Set()};
+      const results = await Promise.allSettled(['crm','n8n'].map(async destination => {
+        if (delivery.accepted.has(destination)) return;
+        const response = await fetch(endpoint, {
+          method:'POST', headers:{'Content-Type':'application/json'}, signal:controller.signal,
+          body:JSON.stringify({destination,payload:delivery.payload})
+        });
+        const data = await response.json().catch(()=>null);
+        if (!response.ok || data?.success !== true) throw new Error('Not accepted');
+        delivery.accepted.add(destination);
+      }));
+      if (results.some(result=>result.status==='rejected')) throw new Error('Incomplete delivery');
       feedback.className='form-feedback success';feedback.textContent='Cadastro recebido. Um especialista Lopes entrará em contato com você.';
       window.LeadContext.track('generate_lead');
-      form.reset();window.dispatchEvent(new CustomEvent('lead:accepted',{detail:{source:'sousa-andrade-flamboyant'}}));
+      delivery=null;form.reset();window.dispatchEvent(new CustomEvent('lead:accepted',{detail:{source:'sousa-andrade-flamboyant'}}));
     } catch {feedback.className='form-feedback error';feedback.textContent='Não foi possível enviar agora. Seus dados continuam aqui. Tente novamente.';}
     finally{clearTimeout(timeout);pending=false;submit.disabled=false;$('span',submit).textContent='Quero receber em primeira mão';}
   });

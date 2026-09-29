@@ -1,6 +1,9 @@
 // Local preview server with HTTP range support for scroll-controlled video.
-// This server does not receive leads or emulate a CRM.
+// /api/leads relays real submissions; tests must mock outbound requests.
 import http from 'node:http';
+import { loadEnvFile } from 'node:process';
+try { loadEnvFile('.env.local'); } catch (error) { if(error.code !== 'ENOENT') throw error; }
+import leadHandler from './api/leads.js';
 import { createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -8,6 +11,14 @@ import path from 'node:path';
 const root = fileURLToPath(new URL('./dist/', import.meta.url));
 const types = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.json':'application/json', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.webp':'image/webp', '.mp4':'video/mp4', '.ttf':'font/ttf' };
 const server = http.createServer(async (req,res) => {
+  if (new URL(req.url,'http://localhost').pathname === '/api/leads') {
+    let raw='';
+    for await (const chunk of req) {raw+=chunk;if(raw.length>32768){res.writeHead(413).end();return;}}
+    req.body=raw;
+    res.status=code=>{res.statusCode=code;return res;};
+    res.json=data=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(data));};
+    return leadHandler(req,res);
+  }
   if (!['GET','HEAD'].includes(req.method)) { res.writeHead(405).end();return; }
   try {
     const url = new URL(req.url, 'http://localhost');

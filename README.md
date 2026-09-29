@@ -1,3 +1,13 @@
+> **Integração atual (substitui o fluxo n8n → CRM descrito historicamente abaixo):** formulário → `/api/leads` → CRM e n8n em requisições independentes. A Vercel publica a função de `api/leads.js` além dos arquivos estáticos. O servidor local também atende essa rota e lê `.env.local`.
+>
+> Configure `CRM_WEBHOOK_URL` e `N8N_WEBHOOK_URL` em Vercel → Settings → Environment Variables. `.env.example` contém os destinos fornecidos, também usados como padrões no servidor. Não há token adicional indicado na documentação recebida. Após alterações de ambiente, faça novo deploy.
+>
+> CRM recebe name, phone (55 + DDD + número, apenas dígitos), email, message e utm_campaign quando presente. n8n recebe o payload original em português e metadados. A captura não documenta o corpo de resposta do CRM: o adaptador considera HTTP 2xx sem erro explícito. n8n exige 2xx e success:true.
+>
+> O frontend confirma e registra generate_lead somente após ambos aceitarem. Na mesma página, repetir dados idênticos após falha parcial tenta apenas o destino não confirmado. Isso não garante deduplicação após reload, mudança de dados ou timeout de resultado desconhecido; deduplicação durável pertence aos destinos. Não encaminhar novamente o n8n ao CRM, pois isso duplicaria o lead.
+>
+> Validação com fetch simulado, sem leads reais. Cadastrar lead de homologação e conferir ambos os destinos continua necessário para validação ponta a ponta.
+
 # Sousa Andrade / Lopes — Flamboyant
 
 Landing page estática em português, com mídia gerada no Higgsfield e direção de design Impeccable. O conteúdo publicado está em `dist/`; briefing e materiais originais permanecem na raiz.
