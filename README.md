@@ -47,7 +47,7 @@ Revisão visual desktop (1440 px) e celular (390 px), com capturas complementare
 
 ## Atualização de VSL e movimento
 
-A VSL usa dois vídeos distintos: sGRuxlxNnD4 (horizontal) e iPDSv4ugkNQ (vertical). A versão vertical é selecionada até 760px ou em tablets até 1024px em orientação retrato. Após iniciar, a versão permanece estável durante a reprodução, mesmo ao girar o dispositivo. As capas locais estão configuradas em `vslThumbnailHorizontal` e `vslThumbnailVertical`. O player e a API YouTube só carregam após o clique; autoplay nunca ocorre por scroll. Progresso usa a YouTube IFrame Player API, com marcos únicos por carregamento/reprodução. Bloqueio de autoplay mantém o play nativo disponível.
+A VSL usa dois vídeos distintos: UowYhUXAkWg (horizontal) e iPDSv4ugkNQ (vertical). A versão vertical é selecionada até 760px ou em tablets até 1024px em orientação retrato. Após iniciar, a versão permanece estável durante a reprodução, mesmo ao girar o dispositivo. As capas locais estão configuradas em `vslThumbnailHorizontal` e `vslThumbnailVertical`. O player e a API YouTube só carregam após o clique; autoplay nunca ocorre por scroll. Progresso usa a YouTube IFrame Player API, com marcos únicos por carregamento/reprodução. Bloqueio de autoplay mantém o play nativo disponível.
 
 Os loops de shopping/parque foram gerados no Higgsfield a partir das fotos fornecidas; possuem controles de pausa e param fora da tela.
 

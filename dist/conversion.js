@@ -42,7 +42,7 @@
   function select(){
     if(activated)return;
     const vertical=media.matches;
-    selected={video_id:vertical?'iPDSv4ugkNQ':'sGRuxlxNnD4',video_orientation:vertical?'mobile_vertical':'desktop_horizontal'};
+    selected={video_id:vertical?'iPDSv4ugkNQ':'UowYhUXAkWg',video_orientation:vertical?'mobile_vertical':'desktop_horizontal'};
     box.classList.toggle('vertical',vertical);
     // Supplied custom artwork can replace the corresponding video's preview.
     thumbnail.src=(vertical?config.vslThumbnailVertical:config.vslThumbnailHorizontal) || `https://i.ytimg.com/vi/${selected.video_id}/hqdefault.jpg`;
