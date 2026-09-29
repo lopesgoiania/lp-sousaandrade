@@ -6,3 +6,5 @@ node_modules/
 .sites-runtime/
 .impeccable/review/
 .impeccable/live/
+
+.vercel/

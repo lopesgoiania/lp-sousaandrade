@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { createRoot } from 'react-dom/client';
 import { TextEffect } from '@/components/ui/text-effect';
 
 function OpportunityTitle() {
+  const reduced = useReducedMotion();
   const ref = useRef<HTMLHeadingElement>(null);
   const [trigger, setTrigger] = useState(false);
 
@@ -13,7 +15,7 @@ function OpportunityTitle() {
       return;
     }
 
-    const section = document.getElementById('compactos') || ref.current;
+    const section = ref.current;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -34,7 +36,7 @@ function OpportunityTitle() {
 
   return (
     <h2 ref={ref} style={{ margin: 0, minHeight: '1.2em' }}>
-      {trigger ? (
+      {reduced ? <>Novos espaços.<br /><em>Grandes possibilidades.</em></> : trigger ? (
         <>
           <TextEffect per="word" preset="slide" trigger={trigger} as="span">
             Novos espaços.
