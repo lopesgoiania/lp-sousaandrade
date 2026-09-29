@@ -105,7 +105,7 @@ O JSON inclui nome, email, telefone, empreendimento e preserva lead_intent, atri
 
 Webhook principal configurado: https://n8n.marketinglopes.com.br/webhook/captura-site-codex . O formulário está habilitado; o endpoint continua devendo responder 2xx com `{"success":true}` após receber o lead. CORS deve autorizar o domínio publicado. Não foram enviados leads de teste ao webhook real.
 
-`/confirmacao-vip` aponta para `dist/confirmacao-vip.html` na Vercel. `vipWebhookUrl` em config.js ainda contém `URL_WEBHOOK_CLICKUP`: substituir pelo webhook secundário HTTPS para habilitar a ação. A página lê nome/email da URL como texto não confiável, valida presença e formato e envia POST JSON {nome,email} apenas ao clique. Exige também 2xx com success:true para mostrar confirmação; erros permitem repetir sem recarregar. Links incompletos não enviam. Não usa tags de analytics e aplica no-referrer/noindex. Os parâmetros não autenticam identidade: o workflow deve validar o contato e tratar repetições.
+`/confirmacao-vip` aponta para `dist/confirmacao-vip.html` na Vercel. `vipWebhookUrl` em config.js está configurado como `https://n8n.marketinglopes.com.br/webhook/confirma-vip-clickup`. A página lê nome/email da URL como texto não confiável, valida presença e formato e envia POST JSON {nome,email} apenas ao clique. Exige também 2xx com success:true para mostrar confirmação; erros permitem repetir sem recarregar. Links incompletos não enviam. Não usa tags de analytics e aplica no-referrer/noindex. Os parâmetros não autenticam identidade: o workflow deve validar o contato e tratar repetições.
 
 E-mails e instruções da régua estão em `emails/README.md`. O prazo de contato “em instantes” requer operação de atendimento compatível.
 
