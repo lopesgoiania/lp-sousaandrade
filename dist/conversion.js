@@ -15,7 +15,7 @@
   function track(event, extra = {}) {
     window.dataLayer = window.dataLayer || [];
     // No contact data or query strings are sent to analytics.
-    window.dataLayer.push({event,lead_intent:intent,page_location:location.origin + location.pathname,...extra});
+    window.dataLayer.push({event,form_id:"form-contato",lead_intent:intent,page_location:location.origin + location.pathname,...extra});
   }
   window.LeadContext = Object.freeze({track,payload:()=>({lead_intent:intent,attribution:{...attribution},...landing,submitted_at:new Date().toISOString()})});
   document.addEventListener('click', event => {
@@ -28,7 +28,7 @@
     if (map || summary) track('location_interaction',{interaction_type:map?'map_view':'accordion',location_item:map?.dataset.view || summary.textContent.trim()});
   });
   let started=false;
-  const form=document.querySelector('#lead-form');
+  const form=document.querySelector('#form-contato');
   const start=event=>{if(!started && event.isTrusted && event.target.matches('input:not([name="company"]),button[type="submit"]')){started=true;track('form_start');}};
   form.addEventListener('input',start);form.addEventListener('click',start);form.addEventListener('focusin',start);
 
