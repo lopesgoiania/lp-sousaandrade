@@ -285,17 +285,21 @@
       };
       const identity = JSON.stringify([name,email,digits,payload.lead_intent]);
       if (!delivery || delivery.identity !== identity) delivery = {identity,payload,accepted:new Set()};
-      const results = await Promise.allSettled(['crm','n8n'].map(async destination => {
-        if (delivery.accepted.has(destination)) return;
+      const attempt = delivery;
+      const send = async destination => {
+        if (attempt.accepted.has(destination)) return;
         const response = await fetch(endpoint, {
-          method:'POST', headers:{'Content-Type':'application/json'}, signal:controller.signal,
-          body:JSON.stringify({destination,payload:delivery.payload})
+          method:'POST', headers:{'Content-Type':'application/json'},
+          signal: destination === 'crm' ? controller.signal : AbortSignal.timeout(15000),
+          body:JSON.stringify({destination,payload:attempt.payload})
         });
         const data = await response.json().catch(()=>null);
         if (!response.ok || data?.success !== true) throw new Error('Not accepted');
-        delivery.accepted.add(destination);
-      }));
-      if (results.some(result=>result.status==='rejected')) throw new Error('Incomplete delivery');
+        attempt.accepted.add(destination);
+      };
+      // Email marketing is independent: its failure must not block CRM confirmation.
+      void send('n8n').catch(() => {});
+      await send('crm');
       feedback.className='form-feedback success';feedback.textContent='Cadastro recebido. Um especialista Lopes entrará em contato com você.';
       window.LeadContext.track('generate_lead');
       delivery=null;form.reset();window.dispatchEvent(new CustomEvent('lead:accepted',{detail:{source:'sousa-andrade-flamboyant'}}));
