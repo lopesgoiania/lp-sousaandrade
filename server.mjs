@@ -22,7 +22,7 @@ const server = http.createServer(async (req,res) => {
   if (!['GET','HEAD'].includes(req.method)) { res.writeHead(405).end();return; }
   try {
     const url = new URL(req.url, 'http://localhost');
-    const target = path.resolve(root, '.' + decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname === '/confirmacao-vip' ? '/confirmacao-vip.html' : url.pathname));
+    const target = path.resolve(root, '.' + decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname === '/confirmacao-vip' ? '/confirmacao-vip.html' : url.pathname === '/politica-de-privacidade' ? '/politica-de-privacidade.html' : url.pathname));
     if (!target.startsWith(root)) { res.writeHead(403).end();return; }
     const info=await stat(target); if(!info.isFile()){res.writeHead(404).end();return;}
     const headers={'Content-Type':types[path.extname(target)]||'application/octet-stream','Accept-Ranges':'bytes','Cache-Control':'no-cache'};
