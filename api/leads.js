@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   let body;
   try { body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body; } catch { return res.status(400).json({success:false}); }
   const {destination, payload:p} = body || {};
-  if (!['crm','n8n'].includes(destination) || !p || typeof p.nome !== 'string' || p.nome.trim().length<2 || p.nome.length>100 || typeof p.email !== 'string' || p.email.length>254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email) || typeof p.telefone !== 'string' || !/^\+55\d{10,11}$/.test(p.telefone) || p.consent !== true) return res.status(400).json({success:false});
+  if (!['crm','n8n'].includes(destination) || !p || typeof p.nome !== 'string' || p.nome.trim().length<2 || p.nome.length>100 || typeof p.email !== 'string' || p.email.length>254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email) || typeof p.telefone !== 'string' || !/^\+[1-9]\d{7,14}$/.test(p.telefone) || p.consent !== true) return res.status(400).json({success:false});
   const url = destination === 'crm'
     ? process.env.CRM_WEBHOOK_URL || 'https://api.100bug.app/webhook/leads/9452e285-8aac-4255-90b1-2fd770075473'
     : process.env.N8N_WEBHOOK_URL || 'https://n8n.marketinglopes.com.br/webhook/captura-site-codex';
