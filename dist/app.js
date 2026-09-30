@@ -263,7 +263,7 @@
     if (!endpoint) { feedback.className='form-feedback';feedback.textContent='O cadastro será aberto em breve.';return; }
     const email=$('#email').value.trim();
     const name=$('#name').value.trim(); const international=window.PhoneField?.getNumber() || ''; const digits=international.replace(/\D/g,''); const consent=$('#consent').checked;
-    const errors={email:!email || !$('#email').validity.valid?'Informe um e-mail válido.':'',name:name.length<2?'Informe seu nome para continuar.':'',phone:!window.PhoneField?.isValid()?'Confira o número e o DDD/código do país.':'',consent:!consent?'Autorize o contato para enviar seu cadastro.':''};
+    const errors={email:!email || !$('#email').validity.valid?'Informe um e-mail válido.':'',name:name.length<2?'Informe seu nome para continuar.':'',phone:!window.PhoneField?.isValid()?'Confira o número e o DDD/código do país.':'',consent:!consent?'Concorde com a politica de privacidade para enviar seu cadastro.':''};
     Object.entries(errors).forEach(([id,message])=>fieldError(id,message));
     const invalid=Object.keys(errors).find(id=>errors[id]); if(invalid){$(`#${invalid}`).focus();return;}
     if ($('#company').value) return;
@@ -277,7 +277,6 @@
         telefone: international,
         form_id: form.id,
         phone_country: window.PhoneField.getCountry(),
-        geo_match: window.PhoneField.getGeo(),
         empreendimento: config.empreendimento,
         consent: true,
         consentText: $('.consent span').textContent,
