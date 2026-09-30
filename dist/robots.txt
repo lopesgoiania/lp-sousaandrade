@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lancamentosousaandrade.com.br/sitemap.xml
