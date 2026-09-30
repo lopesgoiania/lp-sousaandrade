@@ -19,6 +19,10 @@
     {
       "source": "/confirmacao-vip",
       "destination": "/confirmacao-vip.html"
+    },
+    {
+      "source": "/politica-de-privacidade",
+      "destination": "/politica-de-privacidade.html"
     }
   ]
 }
