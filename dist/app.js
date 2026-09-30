@@ -147,7 +147,7 @@
         options: { duration: 700, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }
       };
     }
-    if (element.id === 'lead-form') {
+    if (element.id === 'form-contato') {
       return {
         keyframes: [
           { transform: 'translateX(28px) translateY(12px)', opacity: 0 },
@@ -194,7 +194,7 @@
     }
   },{threshold:.15, rootMargin: '0px 0px -40px 0px'});
 
-  $$('.motion-heading, .vsl-heading, .vsl-player, .feature-shopping, .feature-park, #map-canvas, .opportunity-copy, .building-art, .choices h2, .choice-beam-cell, .partnership, .partner-logos, .contact-copy, #lead-form').forEach(element=>motionObserver.observe(element));
+  $$('.motion-heading, .vsl-heading, .vsl-player, .feature-shopping, .feature-park, #map-canvas, .opportunity-copy, .building-art, .choices h2, .choice-beam-cell, .partnership, .partner-logos, .contact-copy, #form-contato').forEach(element=>motionObserver.observe(element));
 
   let countFrame=0;
   const countNodes=$$('[data-count]');
@@ -244,19 +244,14 @@
   }
   drawBuilding();
 
-  const form = $('#lead-form');
+  const form = $('#form-contato');
   const submit = $('button[type="submit"]', form);
   const phone = $('#phone');
   const feedback = $('#form-feedback');
   const endpoint = '/api/leads';
   submit.disabled = false;
   $('#availability').hidden = true;
-  phone.addEventListener('input', () => {
-    let digits = phone.value.replace(/\D/g, '');
-    if (digits.length > 11 && digits.startsWith('55')) digits = digits.slice(2);
-    digits = digits.slice(0,11);
-    phone.value = digits.length <= 2 ? digits : `(${digits.slice(0,2)}) ${digits.slice(2).replace(/^(\d{4,5})(\d{4})$/, '$1-$2')}`;
-  });
+
   function fieldError(id, message) { const el=$(`#${id}`); el.setAttribute('aria-invalid',String(!!message)); $(`#${id}-error`).textContent=message; }
   ['name','phone','email','consent'].forEach(id => $(`#${id}`).addEventListener('input', () => fieldError(id,'')));
   let pending=false;
@@ -267,8 +262,8 @@
     window.LeadContext.track('form_submit');
     if (!endpoint) { feedback.className='form-feedback';feedback.textContent='O cadastro será aberto em breve.';return; }
     const email=$('#email').value.trim();
-    const name=$('#name').value.trim(); const digits=phone.value.replace(/\D/g,''); const consent=$('#consent').checked;
-    const errors={email:!email || !$('#email').validity.valid?'Informe um e-mail válido.':'',name:name.length<2?'Informe seu nome para continuar.':'',phone:!/^\d{10,11}$/.test(digits)?'Informe um telefone válido com DDD.':'',consent:!consent?'Autorize o contato para enviar seu cadastro.':''};
+    const name=$('#name').value.trim(); const international=window.PhoneField?.getNumber() || ''; const digits=international.replace(/\D/g,''); const consent=$('#consent').checked;
+    const errors={email:!email || !$('#email').validity.valid?'Informe um e-mail válido.':'',name:name.length<2?'Informe seu nome para continuar.':'',phone:!window.PhoneField?.isValid()?'Confira o número e o DDD/código do país.':'',consent:!consent?'Concorde com a politica de privacidade para enviar seu cadastro.':''};
     Object.entries(errors).forEach(([id,message])=>fieldError(id,message));
     const invalid=Object.keys(errors).find(id=>errors[id]); if(invalid){$(`#${invalid}`).focus();return;}
     if ($('#company').value) return;
@@ -279,7 +274,9 @@
       const payload = {
         nome: name,
         email,
-        telefone: `+55${digits}`,
+        telefone: international,
+        form_id: form.id,
+        phone_country: window.PhoneField.getCountry(),
         empreendimento: config.empreendimento,
         consent: true,
         consentText: $('.consent span').textContent,
