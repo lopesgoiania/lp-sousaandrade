@@ -4,7 +4,7 @@
 >
 > CRM recebe name, phone (55 + DDD + número, apenas dígitos), email, message e utm_campaign quando presente. n8n recebe o payload original em português e metadados. A captura não documenta o corpo de resposta do CRM: o adaptador considera HTTP 2xx sem erro explícito. n8n exige 2xx e success:true.
 >
-> O frontend confirma e registra generate_lead somente após ambos aceitarem. Na mesma página, repetir dados idênticos após falha parcial tenta apenas o destino não confirmado. Isso não garante deduplicação após reload, mudança de dados ou timeout de resultado desconhecido; deduplicação durável pertence aos destinos. Não encaminhar novamente o n8n ao CRM, pois isso duplicaria o lead.
+> O frontend confirma e registra generate_lead assim que o CRM aceita. O envio para n8n/email marketing ocorre de forma independente: falha ou demora desse destino não bloqueia o cadastro nem a confirmação do CRM. Na mesma página, repetir dados idênticos após falha parcial tenta apenas o destino não confirmado. Isso não garante deduplicação após reload, mudança de dados ou timeout de resultado desconhecido; deduplicação durável pertence aos destinos. Não encaminhar novamente o n8n ao CRM, pois isso duplicaria o lead.
 >
 > Validação com fetch simulado, sem leads reais. Cadastrar lead de homologação e conferir ambos os destinos continua necessário para validação ponta a ponta.
 
