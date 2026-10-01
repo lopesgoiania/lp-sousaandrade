@@ -284,14 +284,14 @@
         ...window.LeadContext.payload()
       };
       const identity = JSON.stringify([name,email,digits,payload.lead_intent]);
-      if (!delivery || delivery.identity !== identity) delivery = {identity,payload,accepted:new Set()};
+      if (!delivery || delivery.identity !== identity) delivery = {identity,payload,meta_context:window.MetaTracking?.context()||null,accepted:new Set()};
       const attempt = delivery;
       const send = async destination => {
         if (attempt.accepted.has(destination)) return;
         const response = await fetch(endpoint, {
           method:'POST', headers:{'Content-Type':'application/json'},
           signal: destination === 'crm' ? controller.signal : AbortSignal.timeout(15000),
-          body:JSON.stringify({destination,payload:attempt.payload})
+          body:JSON.stringify({destination,payload:attempt.payload,...(destination==='crm'?{meta_context:attempt.meta_context}:{})})
         });
         const data = await response.json().catch(()=>null);
         if (!response.ok || data?.success !== true) throw new Error('Not accepted');
@@ -302,6 +302,7 @@
       await send('crm');
       feedback.className='form-feedback success';feedback.textContent='Cadastro recebido. Um especialista Lopes entrará em contato com você.';
       window.LeadContext.track('generate_lead');
+      void window.MetaTracking?.lead(attempt.payload,attempt.meta_context);
       delivery=null;form.reset();window.dispatchEvent(new CustomEvent('lead:accepted',{detail:{source:'sousa-andrade-flamboyant'}}));
     } catch {feedback.className='form-feedback error';feedback.textContent='Não foi possível enviar agora. Seus dados continuam aqui. Tente novamente.';}
     finally{clearTimeout(timeout);pending=false;submit.disabled=false;$('span',submit).textContent='Quero receber em primeira mão';}

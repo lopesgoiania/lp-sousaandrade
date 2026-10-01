@@ -1,10 +1,11 @@
+import {sendMeta} from '../lib/meta.js';
 // Same-origin relay: destinations are fixed server-side, never accepted from clients.
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') { res.setHeader('Allow','POST');return res.status(405).json({success:false}); }
   let body;
   try { body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body; } catch { return res.status(400).json({success:false}); }
-  const {destination, payload:p} = body || {};
+  const {destination, payload:p,meta_context} = body || {};
   if (!['crm','n8n'].includes(destination) || !p || typeof p.nome !== 'string' || p.nome.trim().length<2 || p.nome.length>100 || typeof p.email !== 'string' || p.email.length>254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email) || typeof p.telefone !== 'string' || !/^\+[1-9]\d{7,14}$/.test(p.telefone) || p.consent !== true) return res.status(400).json({success:false});
   const url = destination === 'crm'
     ? process.env.CRM_WEBHOOK_URL || 'https://api.100bug.app/webhook/leads/9452e285-8aac-4255-90b1-2fd770075473'
@@ -20,6 +21,9 @@ export default async function handler(req, res) {
     // CRM documentation specifies POST but no response schema. Accept HTTP success,
     // except explicit application errors. n8n retains its agreed acknowledgement.
     const success = response.ok && (destination==='n8n' ? result?.success===true : result?.success!==false && !result?.error);
+    if(success && destination==='crm' && meta_context?.consent===true) {
+      try { await sendMeta(req,'Lead',meta_context,p); } catch { /* CRM success is independent. */ }
+    }
     return res.status(success?200:502).json({success});
   } catch { return res.status(502).json({success:false}); }
 }

@@ -75,7 +75,7 @@
       const mount=document.createElement('div');box.append(mount);
       player=new YT.Player(mount,{host:'https://www.youtube-nocookie.com',videoId:selected.video_id,width:'100%',height:'100%',playerVars:{autoplay:1,playsinline:1,rel:0,origin:location.origin},events:{
         onReady:event=>{cover.hidden=true;feedback.textContent='';event.target.getIframe().title='Apresentação Sousa Andrade';event.target.getIframe().focus();event.target.playVideo();},
-        onStateChange:event=>{clearInterval(timer);if(event.data===1){feedback.textContent='';timer=setInterval(sample,500);}if(event.data===0&&!milestones.has('complete')){milestones.add('complete');track('vsl_complete',selected);}},
+        onStateChange:event=>{clearInterval(timer);if(event.data===1){window.dispatchEvent(new Event('sa:video-playing'));feedback.textContent='';timer=setInterval(sample,500);}if(event.data===0&&!milestones.has('complete')){milestones.add('complete');track('vsl_complete',selected);}},
         onAutoplayBlocked:()=>{feedback.textContent='Toque no play do vídeo para começar.';},
         onError:()=>{clearInterval(timer);feedback.textContent='Não foi possível reproduzir. Tente novamente.';player?.destroy();activated=false;cover.hidden=false;cover.disabled=false;}
       }});
