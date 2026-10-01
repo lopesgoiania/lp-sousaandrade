@@ -99,4 +99,3 @@
 /* Preferred countries: BR, US, GB, PT, FR, ES. Hide divider during search. */
 .iti__country-selector:has(.iti__search-input:placeholder-shown) .iti__country[data-iso2="es"]{border-bottom:1px solid var(--iti-border-color);padding-bottom:12px;margin-bottom:6px}
 
-.ad-consent{position:fixed;bottom:20px;left:20px;right:20px;max-width:720px;margin:auto;z-index:1000;background:#fff;color:#222;padding:22px;border:1px solid #ddd;box-shadow:0 6px 30px #0003;font-size:14px;line-height:1.6}.ad-consent[hidden]{display:none}.ad-consent p{margin:0 0 14px}.ad-consent a{text-decoration:underline}.ad-consent div{display:flex;gap:12px;flex-wrap:wrap}.ad-consent button{padding:10px 16px;border:1px solid #aaa;background:#fff;color:#222;cursor:pointer}#advertising-accept{background:#e61028;color:white;border-color:#e61028}[data-ad-preferences]{border:0;background:none;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}

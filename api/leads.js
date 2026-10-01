@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     // CRM documentation specifies POST but no response schema. Accept HTTP success,
     // except explicit application errors. n8n retains its agreed acknowledgement.
     const success = response.ok && (destination==='n8n' ? result?.success===true : result?.success!==false && !result?.error);
-    if(success && destination==='crm' && meta_context?.consent===true) {
+    if(success && destination==='crm' && meta_context) {
       try { await sendMeta(req,'Lead',meta_context,p); } catch { /* CRM success is independent. */ }
     }
     return res.status(success?200:502).json({success});
