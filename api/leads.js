@@ -12,6 +12,7 @@ export default async function handler(req, res) {
     : process.env.N8N_WEBHOOK_URL || 'https://n8n.marketinglopes.com.br/webhook/captura-site-codex';
   const data = destination === 'crm' ? {
     name:p.nome,phone:p.telefone.replace(/\D/g,''),email:p.email,
+    ...(typeof p.page_url === 'string' && p.page_url ? {page_url:p.page_url} : {}),
     message:`Interesse no pré-lançamento Sousa Andrade — Flamboyant. Perfil: ${['morar','investir'].includes(p.lead_intent)?p.lead_intent:'não informado'}.`,
     ...(typeof p.attribution?.utm_campaign === 'string' ? {utm_campaign:p.attribution.utm_campaign.slice(0,500)} : {})
   } : p;

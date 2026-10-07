@@ -9,6 +9,8 @@
   keys.forEach(key => { if (query.has(key)) attribution[key] = query.get(key).slice(0,500); });
   save('sa_attribution', attribution);
   const landing = read('sa_landing') || {landing_page:location.origin + location.pathname, arrived_at:new Date().toISOString()};
+  // Preserve the full entry URL across in-page navigation and reloads.
+  if (typeof landing.page_url !== 'string' || !landing.page_url) landing.page_url = location.href;
   save('sa_landing', landing);
   let intent = read('sa_intent');
   if (!['morar','investir'].includes(intent)) intent = 'nao_informado';
