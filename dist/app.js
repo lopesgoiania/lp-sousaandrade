@@ -219,6 +219,7 @@
   // An explicit wireframe volume, never a claimed architectural rendering.
   function drawBuilding() {
     const canvas = $('#building');
+    if (!canvas) return;
     const context = canvas.getContext('2d');
     if (!context) return;
     const width = canvas.clientWidth, height = canvas.clientHeight;

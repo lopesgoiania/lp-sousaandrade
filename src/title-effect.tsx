@@ -36,21 +36,21 @@ function OpportunityTitle() {
 
   return (
     <h2 ref={ref} style={{ margin: 0, minHeight: '1.2em' }}>
-      {reduced ? <>Novos espaços.<br /><em>Grandes possibilidades.</em></> : trigger ? (
+      {reduced ? <>Menos excesso.<br /><em>Mais sensações.</em></> : trigger ? (
         <>
           <TextEffect per="word" preset="slide" trigger={trigger} as="span">
-            Novos espaços.
+            Menos excesso.
           </TextEffect>
           <br />
           <em>
             <TextEffect per="word" preset="slide" delay={0.2} trigger={trigger} as="span">
-              Grandes possibilidades.
+              Mais sensações.
             </TextEffect>
           </em>
         </>
       ) : (
         <span style={{ opacity: 0 }}>
-          Novos espaços.<br /><em>Grandes possibilidades.</em>
+          Menos excesso.<br /><em>Mais sensações.</em>
         </span>
       )}
     </h2>
